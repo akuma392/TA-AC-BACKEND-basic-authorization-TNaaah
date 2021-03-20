@@ -1,0 +1,14 @@
+<%- include('partials/header') -%>
+<main class="comment-update">
+  <form
+    id="create-article"
+    action="/comments/<%= comment.id%>/edit"
+    method="POST"
+  >
+    <label for=""> update comment</label>
+    <input type="text" name="content" id="" value="<%= comment.content %>" />
+    <input type="submit" name="" id="" value="Update Comment" />
+  </form>
+</main>
+
+<%- include('partials/footer') -%>

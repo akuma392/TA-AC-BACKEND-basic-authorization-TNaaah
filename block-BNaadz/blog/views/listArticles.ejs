@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%if(articles.length) { %> <% articles.forEach(article => { %>
+    <a href="/articles/<%= article.id%>"> <h2><%= article.title %></h2></a>
+    <a href="/articles/<%= article.id%>">View</a>
+    <a href="/articles/<%= article.id%>/edit">Update</a>
+    <a href="/articles/<%= article.id%>/delete">Delete</a>
+    <% })%> <% } else {%>
+    <h2>no users available</h2>
+    <% }%>
+    <a href="/articles/new">Add Articles</a>
+  </body>
+</html>
