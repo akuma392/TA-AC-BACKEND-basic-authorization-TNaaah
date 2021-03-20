@@ -73,13 +73,22 @@ router.post('/', (req, res, next) => {
 
 router.get('/:id/delete', (req, res, next) => {
   let id = req.params.id;
-  Article.findByIdAndDelete(id, (err) => {
-    if (err) next(err);
-    // res.redirect('/articles');
-    Comment.deleteMany({ articleId: id }, (err, info) => {
-      if (err) next(err);
-      res.redirect('/articles');
-    });
+  let userid = req.user._id;
+  Article.findById(id, (err, article) => {
+    console.log(userid, article.author, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    if (userid == article.author) {
+      console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+      Article.findByIdAndDelete(id, (err) => {
+        if (err) next(err);
+        // res.redirect('/articles');
+        Comment.deleteMany({ articleId: id }, (err, info) => {
+          if (err) return next(err);
+          return res.redirect('/articles');
+        });
+      });
+    } else {
+      res.render('noauth');
+    }
   });
 });
 
