@@ -47,10 +47,13 @@ router.get('/:id', (req, res, next) => {
     .exec((err, article) => {
       if (err) return next(err);
 
-      Comment.find({ articleId: id }, (err, comment) => {
-        if (err) next(err);
-        res.render('singleArticle', { article: article, comments: comment });
-      });
+      // Comment.find({ articleId: id }, (err, comment) => {
+      Comment.find({ articleId: id })
+        .populate('author')
+        .exec((err, comment) => {
+          if (err) next(err);
+          res.render('singleArticle', { article: article, comments: comment });
+        });
     });
 });
 
@@ -82,9 +85,14 @@ router.get('/:id/delete', (req, res, next) => {
 
 router.get('/:id/edit', (req, res, next) => {
   let id = req.params.id;
+  let userid = req.user._id;
   Article.findById(id, (err, article) => {
     if (err) next(err);
-    res.render('updateArticle', { article: article });
+    if (!userid == article.author) {
+      res.redirect('/articles');
+    } else {
+      res.render('updateArticle', { article: article });
+    }
   });
 });
 
@@ -133,6 +141,7 @@ router.post('/:id/comments', (req, res, next) => {
   console.log(req.body);
   console.log('hello comment');
   req.body.articleId = id;
+  req.body.author = req.user._id;
   Comment.create(req.body, (err, comment) => {
     if (err) next(err);
     Article.findByIdAndUpdate(
