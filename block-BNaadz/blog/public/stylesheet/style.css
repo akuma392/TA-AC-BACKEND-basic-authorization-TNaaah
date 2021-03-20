@@ -740,3 +740,10 @@ textarea {
   color: red;
   font-weight: 600;
 }
+
+.auth-error {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
