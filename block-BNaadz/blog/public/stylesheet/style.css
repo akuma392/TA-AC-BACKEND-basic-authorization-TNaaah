@@ -722,3 +722,21 @@ textarea {
   font-weight: 700;
   text-transform: capitalize;
 }
+.card {
+  max-width: 600px;
+  margin: 2rem auto;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding: 1rem;
+}
+.myarticle h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.flash {
+  color: red;
+  font-weight: 600;
+}

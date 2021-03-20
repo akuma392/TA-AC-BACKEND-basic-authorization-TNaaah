@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Comment = require('../models/comment');
+var auth = require('../middlewares/auth');
 
 router.get('/:id/edit', (req, res, next) => {
   console.log('Comment page');
@@ -10,6 +11,8 @@ router.get('/:id/edit', (req, res, next) => {
     res.render('updateComment', { comment });
   });
 });
+
+router.use(auth.loggedInUser);
 
 router.post('/:id/edit', (req, res, next) => {
   var id = req.params.id;
