@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body class="index">
+   
+    <header>
+      <h1><%= user.name%> shopping carts</h1>
+    </header>
+      <ul class="index-root">
+        <%if(carts.length) { %> <% carts.forEach(cart => { %>
+        <li>
+          <h3><%= cart.name%></h3>
+          <p><%= cart.quantity%></p>
+          <p><%= cart.price%></p>
+  
+         
+          <a href="/carts/<%= cart.id%>/delete">
+            <button class="btn"> Remove from cart<button>
+          </a>
+        </li>
+        <% }) %> <% } else {%>
+        <h2>no items in cart</h2>
+        <% }%>
+      </ul>
+  </body>
+</html>

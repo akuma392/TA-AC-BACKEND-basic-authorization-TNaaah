@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheet/style.css" />
+    <title>Handeling Forms 👇</title>
+  </head>
+  <body class="home-index">
+    <div class="container">
+      <header>
+        <h1>Create Account</h1>
+      </header>
+      <% if(error) {%>
+      <p><%= error%></p>
+
+      <%}%>
+      <form action="/users/signup" method="POST">
+        <div class="form-control">
+          <label for="text">Name</label>
+          <input type="text" name="name" placeholder="enter name" />
+          <small class="display"></small>
+        </div>
+
+        <div class="form-control">
+          <label for="text">Email</label>
+          <input
+            id="text"
+            type="email"
+            name="email"
+            placeholder="arya@stark.com"
+          />
+          <small class="display"></small>
+        </div>
+
+        <div class="form-control error">
+          <label for="text">Password</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+          />
+          <small class="display"></small>
+        </div>
+
+        <div class="form-control">
+          <label
+            >Admin <input type="checkbox" name="isAdmin" value="yes" />Yes
+            <input type="checkbox" name="isAdmin" value="no" />No
+          </label>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

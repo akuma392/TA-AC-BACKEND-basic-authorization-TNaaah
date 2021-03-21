@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheet/style.css" />
+    <title>Blogs</title>
+  </head>
+  <body class="single">
+    <header>
+      <h1>List of Items</h1>
+    </header>
+    <ul class="root">
+      <h3><%= item.name%></h3>
+      <p><%= item.quantity%></p>
+      <p><%= item.price%></p>
+
+      <h5>likes: <span><%= item.likes%></span></h5>
+      <%if(session) { %>
+      <div class="like">
+        <a href="/items/<%= item.id%>/like">
+          <button class="btn btn-like">like</button>
+        </a>
+        <a href="/items/<%= item.id%>/dislike">
+          <button class="btn btn-dislike">dislike</button>
+        </a>
+      </div>
+      <%if(user.isAdmin) { %>
+      <div>
+        <a href="/items/<%= item.id%>/edit">
+          <button class="btn">edit</button>
+        </a>
+        <a href="/items/<%= item.id%>/delete">
+          <button class="btn">Delete</button>
+        </a>
+      </div>
+      <% } %> <% } %> <%if(session) {%>
+      <a href="/items/<%= item.id%>/cart"> <button>Add to carts</button> </a>
+      <%}%> <%if(!session) {%>
+      <a href="/users/login"> <button>Add to carts</button> </a>
+      <%}%>
+    </ul>
+  </body>
+</html>
