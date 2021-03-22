@@ -75,9 +75,8 @@ router.get('/:id/delete', (req, res, next) => {
   let id = req.params.id;
   let userid = req.user._id;
   Article.findById(id, (err, article) => {
-    console.log(userid, article.author, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
-    if (userid == article.author) {
-      console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    console.log(typeof userid, typeof article.author, '');
+    if (userid.toString() === article.author.toString()) {
       Article.findByIdAndDelete(id, (err) => {
         if (err) next(err);
         // res.redirect('/articles');
@@ -97,10 +96,12 @@ router.get('/:id/edit', (req, res, next) => {
   let userid = req.user._id;
   Article.findById(id, (err, article) => {
     if (err) next(err);
-    if (!userid == article.author) {
-      res.redirect('/articles');
-    } else {
+
+    console.log(userid, article.author);
+    if (userid.toString() === article.author.toString()) {
       res.render('updateArticle', { article: article });
+    } else {
+      res.redirect('/articles');
     }
   });
 });
