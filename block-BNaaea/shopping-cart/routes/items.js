@@ -4,30 +4,52 @@ var User = require('../models/user');
 
 var Item = require('../models/item');
 var Cart = require('../models/cart');
+var auth = require('../middlewares/auth');
 
+// router.get('/', (req, res, next) => {
+//   Item.find({}, (err, items) => {
+//     if (err) next(err);
+
+//     console.log(items, req.user);
+//     res.render('item', { items: items });
+//   });
+// });
 router.get('/', (req, res, next) => {
-  console.log(req.session.userId, 'from items......');
-  var session = req.session.userId;
-  Item.find({}, (err, items, next) => {
-    if (err) return next(err);
-    User.findById(session, (err, user) => {
-      if (err) return next(err);
-      console.log(user, '000000000000000000000000000000000000000');
-      res.render('item', {
-        items: items,
-        session: session || {},
-        user: user || {},
-      });
+  Item.find({}, (err, items) => {
+    if (err) next(err);
+
+    Item.distinct('category', (err, categories) => {
+      if (err) next(err);
+      console.log(categories);
+      res.render('item', { items: items, categories: categories });
     });
   });
 });
-router.get('/new', (req, res, next) => {
+
+router.use(auth.loggedInUser);
+
+router.get('/new', auth.adminUser, (req, res, next) => {
   res.render('createItem');
 });
 
+router.get('/category/:id', (req, res, next) => {
+  console.log(req.params);
+  let id = req.params.id;
+
+  Item.find({ category: id }, (err, items) => {
+    if (err) return next(err);
+
+    Item.distinct('category', (err, categories) => {
+      if (err) next(err);
+
+      res.render('item', { items: items, categories: categories });
+    });
+  });
+});
 router.post('/', (req, res, next) => {
   var id = req.session.userId;
   req.body.authorId = id;
+  req.body.category = req.body.category.split(' ');
   Item.create(req.body, (err, item) => {
     console.log(err, req.body);
     if (err) return next(err);
@@ -42,11 +64,8 @@ router.get('/:id', (req, res, next) => {
   let session = req.session.userId;
   Item.findById(id, (err, item) => {
     if (err) return next(err);
-    User.findById(session, (err, user) => {
-      if (err) return next(err);
-
-      res.render('singleItem', { item: item, session: session, user: user });
-    });
+    console.log(item);
+    res.render('singleItem', { item: item });
   });
 });
 
@@ -68,6 +87,7 @@ router.get('/:id/edit', (req, res, next) => {
 
 router.post('/:id/edit', (req, res) => {
   let id = req.params.id;
+  req.body.category = req.body.category.split(' ');
   console.log(req.body);
   Item.findByIdAndUpdate(id, req.body, { new: true }, (err, updatedItem) => {
     if (err) next(err);
@@ -103,40 +123,42 @@ router.get('/:id/dislike', (req, res, next) => {
 //       if (err) next(err);
 //       Cart.findOneAndUpdate(
 //         { authorId: user._id },
-//         { $push: { itemId: item._id } },
-//         (err, cart) => {
+//         { $push: { itemId: item._id } }
+//       )
+//         .populate('itemId')
+//         .exec((err, cart) => {
+//           console.log(cart.itemId[0]);
 //           if (err) next(err);
-//           res.render('userCart', { cart: cart, user: user });
-//         }
-//       );
+//           res.render('userCart', {
+//             carts: cart.itemId,
+//             user: user,
+//             cartId: cart._id,
+//           });
+//         });
 //     });
 //   });
 // });
 
 router.get('/:id/cart', (req, res, next) => {
   let id = req.params.id;
-  let session = req.session.userId;
-  Item.findById(id, (err, item) => {
-    if (err) next(err);
+  let userid = req.user._id;
+  console.log(id, userid);
 
-    User.findById(session, (err, user) => {
+  // Cart.findOneAndUpdate({ authorId: userid }, { $push: { itemId: id } })
+  //   .populate('itemId')
+  //   .exec((err, cart) => {
+  //     console.log(cart);
+  //     if (err) next(err);
+  //     res.render('usercart', { carts: cart });
+  //   });
+  Cart.findOneAndUpdate(
+    { authorId: userid },
+    { $push: { itemId: id } },
+    (err, cart) => {
       if (err) next(err);
-      Cart.findOneAndUpdate(
-        { authorId: user._id },
-        { $push: { itemId: item._id } }
-      )
-        .populate('itemId')
-        .exec((err, cart) => {
-          console.log(cart.itemId[0]);
-          if (err) next(err);
-          res.render('userCart', {
-            carts: cart.itemId,
-            user: user,
-            cartId: cart._id,
-          });
-        });
-    });
-  });
+      res.redirect('/carts');
+    }
+  );
 });
 
 module.exports = router;

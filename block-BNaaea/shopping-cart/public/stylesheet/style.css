@@ -747,3 +747,64 @@ textarea {
   justify-content: center;
   align-items: center;
 }
+
+#item-label {
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+#admin-items {
+  margin: 2rem 6rem;
+
+  font-weight: 600;
+}
+#admin-items a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+#admin-items a:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+#item-root {
+  justify-content: right;
+  margin: 0;
+  margin-left: 20rem;
+  margin-top: 3rem;
+}
+
+main {
+  min-height: 65vh;
+  position: relative;
+}
+.category {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+
+  padding: 1rem 3rem;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  text-align: center;
+}
+.category h4 {
+  margin-bottom: 2rem;
+}
+
+.category a {
+  color: white;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+.category a:hover {
+  text-decoration: underline;
+  color: blue;
+}
+.category div {
+  margin-bottom: 1rem;
+}

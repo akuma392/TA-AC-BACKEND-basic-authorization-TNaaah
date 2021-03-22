@@ -1,11 +1,20 @@
 <%- include('partials/header') -%>
 <main>
-  <ul class="index-root">
+  <li class="category">
+    <h4>List of categories</h4>
+    <%if(categories.length && user) { %> <% categories.forEach((category)=>{ %>
+    <div>
+      <a href="/items/category/<%= category%>"> <%= category%> </a>
+    </div>
+    <% }) } %>
+  </li>
+  <ul class="index-root" id="item-root">
     <%if(items.length) { %> <% items.forEach((item)=>{ %>
     <li>
       <h3><%= item.name%></h3>
       <p><%= item.quantity%></p>
       <p><%= item.price%></p>
+      <p><%= item.category%></p>
 
       <h5>likes: <span><%= item.likes%></span></h5>
       <a href="/items/<%=item.id%>">
@@ -16,16 +25,5 @@
     <h2>no items available</h2>
     <% }%>
   </ul>
-
-  <% if (user == null) { %>
-  <a href="/users/login" class="add">
-    <button class="btn-add">Add items</button>
-  </a>
-  <% } else if (!user.isAdmin) { %>
-  <div></div>
-  <% } else { %>
-  <a href="/items/new" class="add">
-    <button class="btn-add">Add items</button>
-  </a>
 </main>
-<% } %> <%- include('partials/footer') -%>
+<%- include('partials/footer') -%>

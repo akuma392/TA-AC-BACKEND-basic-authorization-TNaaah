@@ -33,6 +33,14 @@ userSchema.methods.verifyPassword = function (password, cb) {
   });
 };
 
+userSchema.pre('save', function (next) {
+  if (this.email.includes('admin')) {
+    this.isAdmin = true;
+    next();
+  } else {
+    next();
+  }
+});
 var User = mongoose.model('User', userSchema);
 
 module.exports = User;

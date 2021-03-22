@@ -2,12 +2,13 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
 var Cart = require('../models/cart');
-
+var auth = require('../middlewares/auth');
 router.get('/', (req, res, next) => {
   res.render('home');
 });
 
 router.get('/signup', (req, res, next) => {
+  console.log(req.session, req.user);
   var error = req.flash('error');
   res.render('signup', { error });
 });
@@ -56,6 +57,18 @@ router.post('/login', (req, res, next) => {
       req.session.userId = user.id;
       res.redirect('/items');
     });
+  });
+});
+router.get('/logout', (req, res, next) => {
+  req.session.destroy();
+  res.clearCookie('connect.sid');
+  res.redirect('/users/login');
+});
+
+router.get('/admin', auth.adminUser, (req, res, next) => {
+  User.find({}, (err, users) => {
+    if (err) next(err);
+    res.render('admin', { users });
   });
 });
 module.exports = router;
