@@ -115,28 +115,17 @@ router.get('/:id/dislike', (req, res, next) => {
 
 // router.get('/:id/cart', (req, res, next) => {
 //   let id = req.params.id;
-//   let session = req.session.userId;
-//   Item.findById(id, (err, item) => {
-//     if (err) next(err);
+//   let userid = req.user._id;
+//   console.log(id, userid);
 
-//     User.findById(session, (err, user) => {
+//   Cart.findOneAndUpdate(
+//     { owner: userid },
+//     { $push: { itemId: id } },
+//     (err, cart) => {
 //       if (err) next(err);
-//       Cart.findOneAndUpdate(
-//         { authorId: user._id },
-//         { $push: { itemId: item._id } }
-//       )
-//         .populate('itemId')
-//         .exec((err, cart) => {
-//           console.log(cart.itemId[0]);
-//           if (err) next(err);
-//           res.render('userCart', {
-//             carts: cart.itemId,
-//             user: user,
-//             cartId: cart._id,
-//           });
-//         });
-//     });
-//   });
+//       res.redirect('/carts');
+//     }
+//   );
 // });
 
 router.get('/:id/cart', (req, res, next) => {
@@ -144,21 +133,14 @@ router.get('/:id/cart', (req, res, next) => {
   let userid = req.user._id;
   console.log(id, userid);
 
-  // Cart.findOneAndUpdate({ authorId: userid }, { $push: { itemId: id } })
-  //   .populate('itemId')
-  //   .exec((err, cart) => {
-  //     console.log(cart);
-  //     if (err) next(err);
-  //     res.render('usercart', { carts: cart });
-  //   });
-  Cart.findOneAndUpdate(
-    { authorId: userid },
-    { $push: { itemId: id } },
-    (err, cart) => {
-      if (err) next(err);
-      res.redirect('/carts');
+  Cart.find({ owner: userid }, (err, cart) => {
+    console.log(cart[0].items.length, 'hhhhhhhhhhhhhhhhhhhhhhhhhhh');
+    if (cart[0].items.length) {
+      Cart.findOneAndUpdate({ owner: userid });
+    } else {
+      Cart.findOneAndUpdate({ owner: userid });
     }
-  );
+  });
 });
 
 module.exports = router;
