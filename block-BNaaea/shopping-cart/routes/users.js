@@ -28,7 +28,7 @@ router.post('/signup', (req, res, next) => {
   User.create(req.body, (err, user) => {
     if (err) next(err);
 
-    Cart.create({ authorId: user.id }, (err, cart) => {
+    Cart.create({ owner: user.id }, (err, cart) => {
       if (err) next(err);
       console.log(cart, 'MyCarttttttttttttttttttttt');
       res.redirect('/users/login');
@@ -66,7 +66,7 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.get('/admin', auth.adminUser, (req, res, next) => {
-  User.find({}, (err, users) => {
+  User.find({ isAdmin: false }, (err, users) => {
     if (err) next(err);
     res.render('admin', { users });
   });
