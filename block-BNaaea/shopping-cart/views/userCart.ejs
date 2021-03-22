@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-  </head>
-  <body class="index">
-   
-    <header>
+
+   <%- include('partials/header') -%>
+  
       <h1><%= user.name%> shopping carts</h1>
-    </header>
+    
       <ul class="index-root">
         <%if(carts.length) { %> <% carts.forEach(cart => { %>
         <li>
@@ -27,5 +19,4 @@
         <h2>no items in cart</h2>
         <% }%>
       </ul>
-  </body>
-</html>
+      <%- include('partials/footer') -%>

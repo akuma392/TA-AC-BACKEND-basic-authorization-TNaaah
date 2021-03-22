@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var auth = require('./middlewares/auth');
 
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
@@ -15,10 +16,10 @@ var indexRouter = require('./routes/index');
 var itemRouter = require('./routes/items');
 var commentRouter = require('./routes/comments');
 var usersRouter = require('./routes/users');
-var cartRouter = require('./routes/users');
+var cartRouter = require('./routes/carts');
 
 mongoose.connect(
-  'mongodb://localhost/shopping-cart',
+  'mongodb://localhost/shopping-cart1',
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     console.log(err ? err : 'Connected to database');
@@ -47,6 +48,7 @@ app.use(
 );
 app.use(flash());
 
+app.use(auth.userInfo);
 app.use('/', indexRouter);
 app.use('/items', itemRouter);
 app.use('/comments', commentRouter);

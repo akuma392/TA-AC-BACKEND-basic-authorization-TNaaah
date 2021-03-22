@@ -11,6 +11,7 @@ var itemSchema = new Schema(
 
     commentId: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
     authorId: { type: Schema.Types.ObjectId, ref: 'User' },
+    category: [String],
   },
   { timestamps: true }
 );
