@@ -128,17 +128,58 @@ router.get('/:id/dislike', (req, res, next) => {
 //   );
 // });
 
+// router.get('/:id/cart', (req, res, next) => {
+//   let id = req.params.id;
+//   let userid = req.user._id;
+//   console.log(id, userid);
+
+//   Cart.find({ owner: userid }, (err, cart) => {
+//     console.log(cart[0].items.length, 'hhhhhhhhhhhhhhhhhhhhhhhhhhh');
+//     if (cart[0].items.length) {
+//       Cart.findOneAndUpdate({ owner: userid });
+//     } else {
+//       cart[0].items.itemId = id;
+//       cart[0].items.quantity = 1;
+//       Cart.save((err) => {
+//         if (err) next(err);
+//         console.log(cart);
+//       });
+//     }
+//   });
+// });
+
 router.get('/:id/cart', (req, res, next) => {
   let id = req.params.id;
   let userid = req.user._id;
   console.log(id, userid);
 
   Cart.find({ owner: userid }, (err, cart) => {
-    console.log(cart[0].items.length, 'hhhhhhhhhhhhhhhhhhhhhhhhhhh');
-    if (cart[0].items.length) {
-      Cart.findOneAndUpdate({ owner: userid });
+    console.log(cart[0].items, 'hhhhhhhhhhhhhhhhhhhhhhhhhhh');
+
+    let result = cart[0].items.filter((elm) => elm.itemId == id);
+    console.log(
+      result,
+      'resssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss'
+    );
+
+    if (result.length) {
+      Cart.updateOne(
+        { owner: userid, 'items.itemId': id },
+        { $inc: { 'items.$.quantity': 1 } },
+        (err, carts) => {
+          console.log(err, cart);
+          res.redirect('/carts');
+        }
+      );
     } else {
-      Cart.findOneAndUpdate({ owner: userid });
+      Cart.updateOne(
+        { owner: userid },
+        { $addToSet: { items: { itemId: id, quantity: 1 } } },
+        (err, carts) => {
+          console.log(err, cart);
+          res.redirect('/carts');
+        }
+      );
     }
   });
 });

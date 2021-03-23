@@ -808,3 +808,24 @@ main {
 .category div {
   margin-bottom: 1rem;
 }
+
+.cart-btn {
+  padding: 0.2rem 0.4rem;
+}
+.cart-span {
+  margin: 0 1rem;
+  font-weight: 500;
+}
+
+.buy {
+  text-align: right;
+  margin-right: 4rem;
+  margin-top: 2rem;
+}
+.buy button {
+  padding: 0.2rem 0.6rem;
+}
+.buy p {
+  margin-right: 2.4rem;
+  margin-bottom: 0.7rem;
+}
