@@ -5,6 +5,7 @@ var User = require('../models/user');
 
 var auth = require('../middlewares/auth');
 var upload = require('../utils/multer');
+var UserMedia = require('../models/usermedia');
 
 router.get('/', (req, res, next) => {
   res.render('home');
@@ -72,9 +73,13 @@ router.get('/logout', (req, res, next) => {
 router.get('/admin', auth.adminUser, (req, res, next) => {
   User.find({ isAdmin: false }, (err, users) => {
     if (err) next(err);
-    res.render('admin', { users });
+    UserMedia.find({}, (err, podcasts) => {
+      if (err) next(err);
+      res.render('admin', { users: users, podcasts: podcasts });
+    });
   });
 });
+
 router.get('/profile', (req, res, next) => {
   res.render('myprofile');
 });

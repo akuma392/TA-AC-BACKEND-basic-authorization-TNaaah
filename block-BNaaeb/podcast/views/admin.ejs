@@ -23,6 +23,7 @@
   <div id="admin-items">
     <a href="/podcasts"> View podcasts</a>
   </div>
+  <h1>Lists of Members registered</h1>
   <ul class="index-root">
     <%if(users.length) { %> <% users.forEach((elm)=>{ %>
     <li>
@@ -34,5 +35,22 @@
     <h2>no users available</h2>
     <% }%>
   </ul>
+
+  <h1>Podcast uploaded by users</h1>
+  <div>
+    <%if(podcasts.length) { %> <% podcasts.forEach((podcast)=>{ %>
+    <ul class="index-root">
+      <li>
+        <h3><%= podcast.title%></h3>
+        <div class="videos">
+          <video src="/uploads/<%= podcast.file%>" controls></video>
+        </div>
+        <p><%= podcast.types%></p>
+
+        <h5>likes: <span><%= podcast.likes%></span></h5>
+      </li>
+    </ul>
+    <% } )}%>
+  </div>
 </main>
 <%- include('partials/footer') -%>
