@@ -14,7 +14,7 @@
     <% }%>
 
     <p><%= user.name%></p>
-    <form action="/users/avtar" method="POST" enctype="multipart/form-data">
+    <form action="/podcasts/avtar" method="POST" enctype="multipart/form-data">
       <label for="">Change profile picture</label>
       <input type="file" name="avtar" />
       <button>submit</button>
@@ -23,7 +23,7 @@
   <div id="admin-items">
     <a href="/podcasts"> View podcasts</a>
   </div>
-  <h1>Lists of Members registered</h1>
+  <h1 class="admin-h1">Lists of Members registered</h1>
   <ul class="index-root">
     <%if(users.length) { %> <% users.forEach((elm)=>{ %>
     <li>
@@ -36,7 +36,7 @@
     <% }%>
   </ul>
 
-  <h1>Podcast uploaded by users</h1>
+  <h1 class="admin-h1">Podcast uploaded by users</h1>
   <div>
     <%if(podcasts.length) { %> <% podcasts.forEach((podcast)=>{ %>
     <ul class="index-root">

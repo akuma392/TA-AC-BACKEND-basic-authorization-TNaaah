@@ -540,12 +540,14 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1.2rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
 }
 .index-root li:hover {
   padding: 1rem;
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 5px solid rgba(38, 135, 226, 0.2);
+  border-bottom: 5px solid rgba(12, 16, 230, 0.4);
   background-color: rgba(55, 89, 238, 0.1);
   box-shadow: 2px 2px 4px black;
 }
@@ -923,4 +925,8 @@ main {
   text-decoration: none;
   font-weight: 600;
   font-size: 0.9rem;
+}
+.admin-h1 {
+  text-align: center;
+  margin: 1.4rem 0;
 }

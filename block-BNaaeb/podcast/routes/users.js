@@ -91,7 +91,7 @@ router.post('/avtar', upload.single('file'), (req, res, next) => {
   User.findByIdAndUpdate(id, req.body, (err, user) => {
     if (err) next(err);
     console.log('after update');
-    res.redirect('/prodcast');
+    res.redirect('/podcast');
   });
 });
 

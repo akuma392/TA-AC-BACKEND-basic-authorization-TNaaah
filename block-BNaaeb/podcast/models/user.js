@@ -9,10 +9,10 @@ var userSchema = new Schema(
 
     email: { type: String, unique: true },
     password: { type: String, minlength: 5 },
-
+    pfp: { type: String },
     isAdmin: { type: Boolean, default: false },
     podcastId: [{ type: Schema.Types.ObjectId, ref: 'Media' }],
-    avtar: { type: String },
+
     category: {
       type: String,
       default: 'free',
