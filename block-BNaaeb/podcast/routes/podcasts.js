@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var auth = require('../middlewares/auth');
 var Media = require('../models/media');
+var UserMedia = require('../models/usermedia');
 
 var upload = require('../utils/multer');
 
@@ -51,6 +52,8 @@ router.get('/', (req, res, next) => {
 });
 
 router.use(auth.loggedInUser);
+
+// upload podcast for admin
 router.get('/new', auth.adminUser, (req, res, next) => {
   res.render('createPodcast');
 });
@@ -76,6 +79,24 @@ router.post('/', upload.single('file'), (req, res, next) => {
 //   });
 // });
 
+// upload podcast for users
+
+router.get('/user/new', (req, res, next) => {
+  res.render('userpodcast');
+});
+
+router.post('/users', upload.single('file'), (req, res, next) => {
+  req.body.file = req.file.filename;
+  req.body.types = req.user.category;
+  console.log(req.body, 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+  UserMedia.create(req.body, (err, podcasts) => {
+    if (err) next(err);
+    console.log('user podcast');
+    res.redirect('/podcasts');
+  });
+});
+
+// categories for admin
 router.get('/podcast/:id', (req, res, next) => {
   console.log(req.params);
   let id = req.params.id;
@@ -91,6 +112,7 @@ router.get('/podcast/:id', (req, res, next) => {
   });
 });
 
+// single podcast for admin
 router.get('/:id', (req, res, next) => {
   let id = req.params.id;
 
@@ -101,6 +123,7 @@ router.get('/:id', (req, res, next) => {
   });
 });
 
+// delete podcast
 router.get('/:id/delete', (req, res, next) => {
   let id = req.params.id;
   Media.findByIdAndDelete(id, (err, deletedItem) => {
@@ -109,6 +132,7 @@ router.get('/:id/delete', (req, res, next) => {
   });
 });
 
+// update podcast
 router.get('/:id/edit', (req, res, next) => {
   let id = req.params.id;
   Media.findById(id, (err, item) => {
