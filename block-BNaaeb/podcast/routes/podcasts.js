@@ -158,4 +158,30 @@ router.get('/:id/like', (req, res, next) => {
   });
 });
 
+// approve the podcast uploaded by user
+router.get('/approve/:id', (req, res, next) => {
+  let id = req.params.id;
+  UserMedia.findById(id, (err, podcast) => {
+    if (err) next(err);
+    podcast.owner = req.user._id;
+    Media.create(podcast, (err, newpodcast) => {
+      if (err) next(err);
+      UserMedia.findByIdAndDelete(id, (err, deletedPodcast) => {
+        if (err) next(err);
+        res.redirect('/podcasts');
+      });
+    });
+  });
+});
+
+// reject podcast uploaded by user
+router.get('/reject/:id', (req, res, next) => {
+  let id = req.params.id;
+  console.log(id, 'delete podcast');
+  UserMedia.findByIdAndDelete(id, (err, deletedPodcast) => {
+    if (err) next(err);
+    res.redirect('/podcasts');
+  });
+});
+
 module.exports = router;

@@ -48,6 +48,14 @@
         <p><%= podcast.types%></p>
 
         <h5>likes: <span><%= podcast.likes%></span></h5>
+        <div id="approval">
+          <a href="/podcasts/approve/<%= podcast._id%>"
+            ><button>Approve</button></a
+          >
+          <a href="/podcasts/reject/<%=podcast._id%>"
+            ><button>Reject</button></a
+          >
+        </div>
       </li>
     </ul>
     <% } )}%>
