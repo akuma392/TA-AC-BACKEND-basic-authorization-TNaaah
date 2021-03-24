@@ -1,0 +1,27 @@
+<%- include('partials/header') -%>
+
+<main>
+  <section class="profile">
+    <%if(user.avtar) { %>
+
+    <div>
+      <img src="/uploads/<%= user.avtar%>" alt="" />
+    </div>
+    <% }else {%>
+    <div>
+      <img src="/images/prof.png" alt="" />
+    </div>
+    <% }%>
+
+    <p><%= user.name%></p>
+    <form aaction="/users/avtar" method="POST" enctype="multipart/form-data>
+      <label for="">Change profile picture</label>
+      <input type="file" name="avtar" />
+      <button>submit</button>
+    </form>
+  </section>
+  <div id="admin-items">
+    <a href="/items"> View items</a>
+  </div>
+</main>
+<%- include('partials/footer') -%>
