@@ -1,0 +1,78 @@
+<%- include('partials/header') -%>
+<main class="single-article">
+  <div>
+    <h1>List of Articles</h1>
+  </div>
+  <div class="flex">
+    <ul class="root">
+      <h3><%= article.title%></h3>
+      <p><%= article.description%></p>
+      <p><%= article.tags%></p>
+      <p>Written by: <span><%= article.author.name%></span></p>
+      <h5>likes: <span><%= article.likes%></span></h5>
+      <div class="like">
+        <a href="/articles/<%= article.id%>/likes">
+          <i class="far fa-thumbs-up"></i>
+        </a>
+      </div>
+
+      <div class="crud">
+        <a class="edit" href="/articles/<%= article.id%>/edit">
+          <button>edit</button>
+        </a>
+        <a href="/articles/<%= article.id%>/delete">
+          <button>Delete</button>
+        </a>
+      </div>
+    </ul>
+    <form
+      action="/articles/<%= article.id%>/comments"
+      method="POST"
+      class="comment"
+    >
+      <label for=""> Add comment</label>
+      <textarea
+        name="content"
+        id=""
+        cols="15"
+        rows="5"
+        placeholder="add comment"
+      ></textarea>
+      <button>add</button>
+    </form>
+  </div>
+
+  <ul class="root-remark">
+    <%if(comments.length) { %> <% comments.forEach(remark => { %>
+    <li id="remark">
+      <div class="content">
+        <p><%= remark.content%></p>
+
+        <h4>Commented by <%= remark.author.name%></h4>
+        <h6>Likes <span><%= remark.likes%></span></h6>
+      </div>
+      <div class="edit-delete">
+        <div class="dislike">
+          <a href="/comments/<%= remark.id%>/likes">
+            <i class="far fa-thumbs-up"></i>
+          </a>
+          <a href="/comments/<%= remark.id%>/dislike">
+            <i class="far fa-thumbs-down"></i>
+          </a>
+        </div>
+        <div class="edit">
+          <a href="/comments/<%= remark.id%>/edit">
+            <button>edit</button>
+          </a>
+          <a href="/comments/<%= remark.id%>/delete">
+            <button>Delete</button>
+          </a>
+        </div>
+      </div>
+      <% })%> <% } else {%>
+      <h2 class="no-remark">No remarks is added yet</h2>
+    </li>
+    <% }%>
+  </ul>
+</main>
+<%- include('partials/footer') -%>

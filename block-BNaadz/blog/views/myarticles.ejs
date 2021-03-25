@@ -1,0 +1,25 @@
+<%- include('partials/header') -%>
+<main class="myarticle">
+  <div class="card">
+    <h1><%= user.name%></h1>
+    <p><%= user.email%></p>
+   
+  </div>
+<h3><%= user.name%>'s articles lists </h3>
+  <ul class="index-root">
+    <%if(articles.length) { %> <% articles.forEach((article)=>{ %>
+    <li>
+      <h3><%= article.title%></h3>
+      <p><%= article.description.substring(0,80).concat("...........")%></p>
+      <!-- <p><%= article.tags%></p>
+      <p>Written by: <span><%= article.author%></span></p>
+      <h5>likes: <span><%= article.likes%></span></h5> -->
+      <a href="/articles/<%= article.id%>">
+        <button class="btn">See more</button>
+      </a>
+    </li>
+    <% }) %> <% } else {%>
+    <h2>no articles available</h2>
+    <% }%>
+</main>
+<%- include('partials/footer') -%>
