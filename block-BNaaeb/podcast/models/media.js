@@ -11,6 +11,7 @@ var mediaSchema = new Schema(
     //   enum: ['free', 'vip', 'premium'],
     types: { type: String, default: 'free', enum: ['free', 'vip', 'premium'] },
     file: { type: String },
+    // isApproved: {type:String, default:}
   },
   { timestamps: true }
 );

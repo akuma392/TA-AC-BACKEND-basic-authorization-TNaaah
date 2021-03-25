@@ -84,14 +84,15 @@ router.get('/profile', (req, res, next) => {
   res.render('myprofile');
 });
 
-router.post('/avtar', upload.single('file'), (req, res, next) => {
+router.post('/avtar', upload.single('avtar'), (req, res, next) => {
+  console.log(req.file, '**********');
   req.body.avtar = req.file.filename;
   let id = req.user._id;
   console.log(req.body, 'test');
   User.findByIdAndUpdate(id, req.body, (err, user) => {
     if (err) next(err);
     console.log('after update');
-    res.redirect('/podcast');
+    res.redirect('/podcasts');
   });
 });
 

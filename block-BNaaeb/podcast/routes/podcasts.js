@@ -162,12 +162,19 @@ router.get('/:id/like', (req, res, next) => {
 router.get('/approve/:id', (req, res, next) => {
   let id = req.params.id;
   UserMedia.findById(id, (err, podcast) => {
-    if (err) next(err);
-
-    Media.create(podcast, (err, newpodcast) => {
-      if (err) next(err);
+    if (err) return next(err);
+    console.log(podcast, '*******************');
+    let obj = {
+      title: podcast.title,
+      file: podcast.file,
+      types: podcast.types,
+      likes: podcast.likes,
+    };
+    console.log(podcast, '*******************', obj);
+    Media.create(obj, (err, newpodcast) => {
+      if (err) return next(err);
       UserMedia.findByIdAndDelete(id, (err, deletedPodcast) => {
-        if (err) next(err);
+        if (err) return next(err);
         res.redirect('/podcasts');
       });
     });
@@ -181,19 +188,6 @@ router.get('/reject/:id', (req, res, next) => {
   UserMedia.findByIdAndDelete(id, (err, deletedPodcast) => {
     if (err) next(err);
     res.redirect('/podcasts');
-  });
-});
-
-// admin profile
-
-router.post('/avtar', upload.single('file'), (req, res, next) => {
-  req.body.avtar = req.file.filename;
-  let id = req.user._id;
-  console.log(req.body, 'test');
-  User.findByIdAndUpdate(id, req.body, (err, user) => {
-    if (err) next(err);
-    console.log('after update');
-    res.redirect('/podcast');
   });
 });
 

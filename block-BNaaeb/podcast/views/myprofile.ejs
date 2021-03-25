@@ -14,7 +14,8 @@
     <% }%>
 
     <p><%= user.name%></p>
-    <form aaction="/users/avtar" method="POST" enctype="multipart/form-data>
+    <h6><span><%= user.category%></span></h6>
+    <form action="/users/avtar" method="POST" enctype="multipart/form-data">
       <label for="">Change profile picture</label>
       <input type="file" name="avtar" />
       <button>submit</button>

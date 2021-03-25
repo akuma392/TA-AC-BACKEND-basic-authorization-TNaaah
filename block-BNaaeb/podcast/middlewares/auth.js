@@ -11,12 +11,16 @@ module.exports = {
   userInfo: (req, res, next) => {
     var userId = req.session && req.session.userId;
     if (userId) {
-      User.findById(userId, 'name email isAdmin category', (err, user) => {
-        if (err) return next(err);
-        req.user = user;
-        res.locals.user = user;
-        next();
-      });
+      User.findById(
+        userId,
+        'name email isAdmin category avtar',
+        (err, user) => {
+          if (err) return next(err);
+          req.user = user;
+          res.locals.user = user;
+          next();
+        }
+      );
     } else {
       req.user = null;
       res.locals.user = null;
