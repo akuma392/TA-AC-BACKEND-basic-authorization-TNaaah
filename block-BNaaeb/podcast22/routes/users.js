@@ -59,7 +59,6 @@ router.post('/login', (req, res, next) => {
         return res.redirect('/users/login');
       }
 
-      console.log(req.user, 'userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
       req.session.userId = user.id;
       res.redirect('/podcasts');
     });
@@ -69,6 +68,16 @@ router.get('/logout', (req, res, next) => {
   req.session.destroy();
   res.clearCookie('connect.sid');
   res.redirect('/users/login');
+});
+
+router.get('/admin', auth.adminUser, (req, res, next) => {
+  User.find({ isAdmin: false }, (err, users) => {
+    if (err) next(err);
+    UserMedia.find({}, (err, podcasts) => {
+      if (err) next(err);
+      res.render('admin', { users: users, podcasts: podcasts });
+    });
+  });
 });
 
 router.get('/profile', (req, res, next) => {
@@ -87,28 +96,4 @@ router.post('/avtar', upload.single('avtar'), (req, res, next) => {
   });
 });
 
-router.get('/admin', auth.adminUser, (req, res, next) => {
-  User.find({ isAdmin: false }, (err, users) => {
-    if (err) next(err);
-    UserMedia.find({}, (err, podcasts) => {
-      if (err) next(err);
-      res.render('admin', { users: users, podcasts: podcasts });
-    });
-  });
-});
-
-router.get('/block/:id', auth.adminUser, (req, res, next) => {
-  let id = req.params.id;
-  User.findByIdAndUpdate(id, { isBlock: true }, (err, users) => {
-    if (err) return next(err);
-    res.redirect('/users/admin');
-  });
-});
-router.get('/unblock/:id', auth.adminUser, (req, res, next) => {
-  let id = req.params.id;
-  User.findByIdAndUpdate(id, { isBlock: false }, (err, users) => {
-    if (err) return next(err);
-    res.redirect('/users/admin');
-  });
-});
 module.exports = router;

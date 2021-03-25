@@ -930,15 +930,3 @@ main {
   text-align: center;
   margin: 1.4rem 0;
 }
-
-.blocked span {
-  color: red;
-  font-weight: 600;
-}
-.active span {
-  color: green;
-  font-weight: 600;
-}
-.admin-user a button {
-  margin-right: 0.8rem;
-}

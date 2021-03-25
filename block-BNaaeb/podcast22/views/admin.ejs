@@ -30,15 +30,6 @@
       <h3><%= elm.name%></h3>
       <p><%= elm.email%></p>
       <p><%= elm.category%></p>
-      <% if(elm.isBlock) {%>
-      <p class="blocked"><span>Blocked user</span></p>
-      <% } else {%>
-      <p class="active"><span>Active user</span></p>
-      <% }%>
-      <div class="admin-user">
-        <a href="/users/block/<%= elm._id%>"><button>Block</button></a>
-        <a href="/users/unblock/<%= elm._id%>"><button>Unblock</button></a>
-      </div>
     </li>
     <% }) %> <% } else {%>
     <h2>no users available</h2>
