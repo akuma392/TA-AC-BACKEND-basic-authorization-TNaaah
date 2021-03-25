@@ -21,9 +21,6 @@ var upload = require('../utils/multer');
 router.get('/', (req, res, next) => {
   console.log(req.user, 'abhssss');
   let membership = req.user.category;
-  if (req.user.isBlock) {
-    return res.render('noauth');
-  }
   if (membership == 'free') {
     Media.find({ types: membership }, (err, podcasts) => {
       if (err) next(err);
@@ -152,30 +149,12 @@ router.post('/:id/edit', (req, res) => {
     res.redirect('/podcasts/' + id);
   });
 });
-
 router.get('/:id/like', (req, res, next) => {
   let id = req.params.id;
 
-  Media.findById(id, (err, podcast) => {
-    if (podcast.likedUser.includes(req.user._id)) {
-      Media.findByIdAndUpdate(
-        id,
-        { $inc: { likes: -1 }, $pull: { likedUser: req.user._id } },
-        (err, updatedArticle) => {
-          // if (err) next(err);
-          res.redirect('/podcasts/' + id);
-        }
-      );
-    } else {
-      Media.findByIdAndUpdate(
-        id,
-        { $inc: { likes: 1 }, $push: { likedUser: req.user._id } },
-        (err, updatedArticle) => {
-          // if (err) next(err);
-          res.redirect('/podcasts/' + id);
-        }
-      );
-    }
+  Media.findByIdAndUpdate(id, { $inc: { likes: 1 } }, (err, updatedArticle) => {
+    // if (err) next(err);
+    res.redirect('/podcasts/' + id);
   });
 });
 

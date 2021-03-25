@@ -17,7 +17,7 @@ var usersRouter = require('./routes/users');
 var podcastRouter = require('./routes/podcasts');
 
 mongoose.connect(
-  'mongodb://localhost/podcast1',
+  'mongodb://localhost/podcast',
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => {
     console.log(err ? err : 'Connected to database');

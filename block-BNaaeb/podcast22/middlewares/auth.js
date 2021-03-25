@@ -13,7 +13,7 @@ module.exports = {
     if (userId) {
       User.findById(
         userId,
-        'name email isAdmin category avtar isBlock',
+        'name email isAdmin category avtar',
         (err, user) => {
           if (err) return next(err);
           req.user = user;
