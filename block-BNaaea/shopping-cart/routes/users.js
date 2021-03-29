@@ -3,6 +3,8 @@ var router = express.Router();
 var User = require('../models/user');
 var Cart = require('../models/cart');
 var auth = require('../middlewares/auth');
+
+
 router.get('/', (req, res, next) => {
   res.render('home');
 });

@@ -1,0 +1,29 @@
+<%- include('partials/header') -%>
+<main>
+  <h1><%= user.name%> shopping carts</h1>
+
+  <ul class="index-root">
+    <%if(carts.length) { %> <% carts.forEach(cart => { %>
+    <li>
+      <h3><%= cart.itemId.name%></h3>
+      <p><a href="/carts/<%= cart._id%>/increment"><button class="cart-btn">+</button></a> <span class="cart-span"><%= cart.quantity%></span> <a href="/carts/<%= cart._id%>/decrement"><button class="cart-btn">-</button></a></p>
+      <p>₹<%= Number(cart.quantity) * cart.itemId.price%></p>
+
+     
+      <a href="/carts/<%= cart._id%>/delete">
+        <button class="btn"> Remove from cart<button>
+      </a>
+    </li>
+    <% }) %> <% } else {%>
+    <h2>no items in cart</h2>
+    <% }%>
+  </ul>
+  <div class="buy">
+    <%if(carts.length) { %> 
+    <p>Total Prices:100000</p>
+    <% } %> 
+    <button>Buy products</button>
+  </div>
+
+</main>
+<%- include('partials/footer') -%>
