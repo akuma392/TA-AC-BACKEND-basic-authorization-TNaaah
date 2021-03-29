@@ -22,7 +22,9 @@
       </ul>
 
       <div class="buy">
+        <%if(carts.length) { %> <% carts.forEach(cart => { %>
         <p>Total Prices:100000</p>
+        <% }) %> 
         <button>Buy products</button>
       </div>
       </main>

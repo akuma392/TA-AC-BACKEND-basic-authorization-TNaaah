@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Cart = require('../models/cart');
+var Item = require('../models/item');
 
 router.get('/', (req, res, next) => {
   let userid = req.user._id;
@@ -9,8 +10,29 @@ router.get('/', (req, res, next) => {
     .exec((err, carts) => {
       if (err) next(err);
 
-      console.log(carts[0].items, 'updatedddddddddddddddddddddd');
-      res.render('userCart', { carts: carts[0].items });
+      console.log(carts[0].items, 'updatedddddddddddddddddddddd', req.user);
+      // res.render('userCart', { carts: carts[0].items });
+      Cart.aggregate([
+        {
+          $lookup: {
+            from: 'item',
+            localField: 'carts',
+            foreignField: '_id',
+            as: 'cartObject',
+          },
+        },
+        {
+          $group: {
+            _id: null,
+            prices: {
+              $sum: 'items.$price',
+            },
+          },
+        },
+      ]).exec((err, result) => {
+        console.log(err, result, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      });
+      // res.render('newCart', { carts: carts[0].items });
     });
 });
 // router.get('/:id/delete', (req, res, next) => {
