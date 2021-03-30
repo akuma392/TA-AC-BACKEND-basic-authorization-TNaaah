@@ -12,25 +12,45 @@ router.get('/', (req, res, next) => {
 
       console.log(carts[0].items, 'updatedddddddddddddddddddddd', req.user);
       // res.render('userCart', { carts: carts[0].items });
+      // Cart.aggregate([
+      //   {
+      //     $lookup: {
+      //       from: 'item',
+      //       localField: 'carts',
+      //       foreignField: '_id',
+      //       as: 'cartObject',
+      //     },
+      //   },
+      //   //   {
+      //   //     $group: {
+      //   //       _id: null,
+      //   //       prices: {
+      //   //         $sum: 'items.$price',
+      //   //       },
+      //   //     },
+      //   //   },
+      // ]).exec((err, result) => {
+      //   console.log(err, result, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa');
+      // });
       Cart.aggregate([
-        {
-          $lookup: {
-            from: 'item',
-            localField: 'carts',
-            foreignField: '_id',
-            as: 'cartObject',
-          },
-        },
+        { $unwind: '$items' },
         {
           $group: {
-            _id: null,
-            prices: {
-              $sum: 'items.$price',
-            },
+            _id: '$items.itemId',
+            price: { $sum: '$items.price' },
+            quantity: { $sum: '$items.quantity' },
           },
         },
+        {
+          $project: {
+            total: { $multiply: ['$price', '$quantity'] },
+          },
+        },
+        {
+          $group: { _id: '', totalValue: { $sum: '$total' } },
+        },
       ]).exec((err, result) => {
-        console.log(err, result, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        console.log(err, result, 'tttttttttyyyyyyy');
       });
       // res.render('newCart', { carts: carts[0].items });
     });
