@@ -24,6 +24,15 @@ var cartSchema = new Schema(
   { timestamps: true }
 );
 
+// cartSchema.pre('save', function (next) {
+//   if (this.email.includes('admin')) {
+//     this.isAdmin = true;
+//     next();
+//   } else {
+//     next();
+//   }
+// });
+
 var Cart = mongoose.model('Cart', cartSchema);
 
 module.exports = Cart;
