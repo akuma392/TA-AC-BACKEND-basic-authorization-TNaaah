@@ -1,0 +1,38 @@
+var mongoose = require('mongoose');
+
+var Schema = mongoose.Schema;
+
+// var cartSchema = new Schema(
+//   {
+//     itemId: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
+
+//     authorId: { type: Schema.Types.ObjectId, ref: 'User' },
+//   },
+//   { timestamps: true }
+// );
+var cartSchema = new Schema(
+  {
+    items: [
+      {
+        itemId: { type: Schema.Types.ObjectId, ref: 'Item' },
+        quantity: { type: Number, default: 0 },
+      },
+    ],
+
+    owner: { type: Schema.Types.ObjectId, ref: 'User' },
+  },
+  { timestamps: true }
+);
+
+// cartSchema.pre('save', function (next) {
+//   if (this.email.includes('admin')) {
+//     this.isAdmin = true;
+//     next();
+//   } else {
+//     next();
+//   }
+// });
+
+var Cart = mongoose.model('Cart', cartSchema);
+
+module.exports = Cart;

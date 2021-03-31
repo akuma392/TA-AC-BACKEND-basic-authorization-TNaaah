@@ -1,0 +1,32 @@
+<%- include('partials/header') -%>
+<main>
+  <h1>List of Items</h1>
+
+  <ul class="root">
+    <h3><%= item.name%></h3>
+    <p><%= item.quantity%></p>
+    <p><%= item.price%></p>
+    <p><%= item.category%></p>
+
+    <h5>likes: <span><%= item.likes%></span></h5>
+    <%if(user) { %>
+    <div class="like">
+      <a href="/items/<%= item.id%>/like">
+        <i class="far fa-thumbs-up"></i>
+      </a>
+    </div>
+    <%if(user.isAdmin) { %>
+    <div class="crud">
+      <a href="/items/<%= item.id%>/edit">
+        <button class="btn">edit</button>
+      </a>
+      <a href="/items/<%= item.id%>/delete">
+        <button class="btn">Delete</button>
+      </a>
+    </div>
+    <% } %> <% } %> <%if(user && !user.isAdmin) {%>
+    <a href="/items/<%= item.id%>/cart"> <button>Add to carts</button> </a>
+    <%}%>
+  </ul>
+</main>
+<%- include('partials/footer') -%>

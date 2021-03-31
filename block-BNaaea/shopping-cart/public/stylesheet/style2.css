@@ -1,0 +1,507 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+.index {
+  background-color: black;
+  line-height: 1.5;
+}
+
+.index header {
+  padding: 1rem 0;
+}
+
+.index header h1 {
+  font-size: 3rem;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+}
+
+.index-root {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+}
+
+.index-root li {
+  background-image: -webkit-gradient(linear, left top, right top, from(#868f96), to(#596164));
+  background-image: linear-gradient(to right, #868f96 0%, #596164 100%);
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.index-root li h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.4rem;
+  color: #0926ac;
+}
+
+.index-root li h3 + p {
+  font-size: 0.9rem;
+  margin: 0.5rem;
+  color: black;
+}
+
+.index-root li p {
+  margin: 1rem 0;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.index-root li p span {
+  color: #29f1b5;
+}
+
+.index-root li h5 {
+  color: black;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.index-root li h5 span {
+  color: #07213f;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.index-root li .btn {
+  background-color: #181515;
+  padding: 0.4rem 1rem;
+  border-radius: 2rem;
+  color: white;
+  border: none;
+}
+
+.single {
+  background-color: black;
+  line-height: 1.5;
+  height: 100vh;
+  text-align: center;
+}
+
+.single h1 {
+  color: white;
+  font-size: 3rem;
+  margin: 2rem 0;
+  font-weight: 600;
+}
+
+.root {
+  background-color: #8d9494;
+  max-width: 700px;
+  margin: 3rem auto;
+  width: 100%;
+  text-align: center;
+  padding: 5rem;
+}
+
+.root h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.4rem;
+  color: #0926ac;
+}
+
+.root h3 + p {
+  font-size: 1.1rem;
+  margin: 0.5rem;
+  color: black;
+}
+
+.root p {
+  margin: 1rem 0;
+  font-size: 1.3rem;
+  color: rgba(69, 27, 221, 0.8);
+}
+
+.root p span {
+  color: #29f1b5;
+}
+
+.root h5 {
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.root h5 span {
+  color: #07213f;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.root .btn {
+  background-color: #181515;
+  padding: 0.5rem 1.5rem;
+  border-radius: 2rem;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+  margin-left: 2rem;
+}
+
+.add {
+  color: #7bc723;
+}
+
+.add .btn-add {
+  background-color: white;
+}
+
+.like {
+  margin: 1rem 0;
+}
+
+.like a {
+  color: yellowgreen;
+}
+
+.like-comment {
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.like-comment a {
+  font-size: 0.8rem;
+}
+
+.like-comment .btn {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.comment textarea {
+  margin-top: 2rem;
+}
+
+#id {
+  padding: 2rem;
+}
+
+#id button {
+  padding: 0.5rem 0.75rem;
+}
+
+.home-index {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0, #7f53ac), to(#657ced));
+  background: linear-gradient(to right, #7f53ac 0, #657ced 100%);
+  margin-top: 2rem;
+}
+
+.home-index button {
+  padding: 0.75rem;
+  width: 100%;
+  margin-top: 1rem;
+  border: none;
+  background-color: salmon;
+  border-radius: 5px;
+}
+
+.home-index input {
+  padding: 0.75rem 0.5rem;
+  border-radius: 5px;
+  border: none;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.home-index select {
+  padding: 0.5rem 1rem;
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.home-index .container {
+  max-width: 400px;
+  margin: 2rem auto;
+  background: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.home-index p {
+  padding-top: 1rem;
+}
+
+.home-index .container header {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.home-index .container form {
+  padding: 1rem;
+}
+
+.home-index .form-control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 0.8rem;
+}
+
+.home-index label {
+  padding-bottom: 5px;
+}
+
+.home-index .form-control input:focus {
+  outline: 0;
+  border-color: #777;
+}
+
+.home-index .form-control.success input {
+  border-color: #79d4a1;
+  position: relative;
+}
+
+.home-index .form-control.success {
+  position: relative;
+}
+
+.home-index .form-control.success::before {
+  content: '✅';
+  display: inline-block;
+  position: absolute;
+  right: 12px;
+  top: 66%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 99;
+  font-size: 0.75rem;
+}
+
+.home-index .form-control.error input {
+  border-color: #ed755f;
+}
+
+.home-index .form-control.error {
+  position: relative;
+}
+
+.home-index .form-control.error::before {
+  content: '❌';
+  display: inline-block;
+  position: absolute;
+  right: 12px;
+  top: 66%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 99;
+  font-size: 0.75rem;
+}
+
+.home-index small {
+  color: #ed755f;
+  padding-top: 0.25rem;
+}
+
+.home-index .home ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home-index .home li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 2rem;
+}
+
+.home-index .home a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.home-index .home a:hover {
+  color: greenyellow;
+}
+
+.home-index #home {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 70vh;
+  color: white;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.users {
+  color: white;
+  font-size: 2.5rem;
+  margin-right: 2rem;
+  text-align: right;
+}
+/*# sourceMappingURL=style.css.map */
