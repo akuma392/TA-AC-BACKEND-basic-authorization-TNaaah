@@ -1,0 +1,73 @@
+<!-- 
+    <form action="/items/<%= item.id%>/edit" method="POST">
+      <input
+        type="text"
+        name="name"
+        id=""
+        placeholder="Enter item"
+        value="<%= item.name%>"
+      />
+
+      <input
+        type="number"
+        name="quantity"
+        id=""
+        placeholder="items number"
+        value="<%= item.quantity%>"
+      />
+      <input
+        type="number"
+        name="price"
+        placeholder="add price of item"
+        value="<%= item.price%>"
+      />
+      <button>submit</button>
+    </form> -->
+
+<%- include('partials/header') -%>
+
+<main class="article-main">
+  <form id="create-article" action="/items/<%= item.id%>/edit" method="POST">
+    <div class="form-control">
+      <label for="text"> Item</label>
+      <input
+        type="text"
+        name="name"
+        id=""
+        placeholder="Enter item"
+        value="<%= item.name%>"
+      />
+      <small class="display"></small>
+    </div>
+
+    <div class="form-control">
+      <label for="text">quantity</label>
+      <input
+        type="number"
+        name="quantity"
+        id=""
+        placeholder="items number"
+        value="<%= item.quantity%>"
+      />
+      <small class="display"></small>
+    </div>
+    <div class="form-control">
+      <label for="text">price</label>
+      <input
+        type="number"
+        name="price"
+        placeholder="add price of item"
+        value="<%= item.price%>"
+      />
+      <small class="display"></small>
+    </div>
+    <div class="form-control">
+      <label for="text">category</label>
+      <input type="text" name="category" value="<%= item.category%>" />
+      <small class="display"></small>
+    </div>
+
+    <button type="submit">Update</button>
+  </form>
+</main>
+<%- include('partials/footer') -%>

@@ -1,0 +1,18 @@
+<%- include('partials/header') -%>
+
+<main>
+  <div id="admin-items">
+    <a href="/items"> View items</a>
+  </div>
+  <ul class="index-root">
+    <%if(users.length) { %> <% users.forEach((elm)=>{ %>
+    <li>
+      <h3><%= elm.name%></h3>
+      <p><%= elm.email%></p>
+    </li>
+    <% }) %> <% } else {%>
+    <h2>no users available</h2>
+    <% }%>
+  </ul>
+</main>
+<%- include('partials/footer') -%>
