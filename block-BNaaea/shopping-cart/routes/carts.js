@@ -10,49 +10,39 @@ router.get('/', (req, res, next) => {
     .exec((err, carts) => {
       if (err) next(err);
 
-      console.log(carts[0].items, 'updatedddddddddddddddddddddd', req.user);
-      // res.render('userCart', { carts: carts[0].items });
-      // Cart.aggregate([
-      //   {
-      //     $lookup: {
-      //       from: 'item',
-      //       localField: 'carts',
-      //       foreignField: '_id',
-      //       as: 'cartObject',
-      //     },
-      //   },
-      //   //   {
-      //   //     $group: {
-      //   //       _id: null,
-      //   //       prices: {
-      //   //         $sum: 'items.$price',
-      //   //       },
-      //   //     },
-      //   //   },
-      // ]).exec((err, result) => {
-      //   console.log(err, result, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa');
-      // });
+      console.log(carts, 'updatedddddddddddddddddddddd', req.user);
+
       Cart.aggregate([
-        { $unwind: '$items' },
         {
-          $group: {
-            _id: '$items.itemId',
-            price: { $sum: '$items.price' },
-            quantity: { $sum: '$items.quantity' },
+          $unwind: '$items',
+        },
+        {
+          $lookup: {
+            from: 'items', // or products collection, whatever you have
+            localField: 'items.itemId',
+            foreignField: '_id',
+            as: 'item_details',
           },
+        },
+        {
+          $unwind: '$item_details',
         },
         {
           $project: {
-            total: { $multiply: ['$price', '$quantity'] },
+            total: { $multiply: ['$item_details.price', '$items.quantity'] },
           },
         },
         {
-          $group: { _id: '', totalValue: { $sum: '$total' } },
+          $group: {
+            _id: '',
+            totalValue: { $sum: '$total' },
+          },
         },
       ]).exec((err, result) => {
         console.log(err, result, 'tttttttttyyyyyyy');
+        if (err) return next(err);
+        res.render('newCart', { carts: carts[0].items, result: result });
       });
-      // res.render('newCart', { carts: carts[0].items });
     });
 });
 // router.get('/:id/delete', (req, res, next) => {
