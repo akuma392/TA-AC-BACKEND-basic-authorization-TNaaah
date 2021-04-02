@@ -28,6 +28,17 @@
     <%if(users.length) { %> <% users.forEach((elm)=>{ %>
     <li>
       <h3><%= elm.name%></h3>
+      <%if(elm.avtar) { %>
+
+      <div id="user-profile">
+        <img src="/uploads/<%= elm.avtar%>" alt="" />
+      </div>
+      <% } else {%>
+      <div id="user-profile">
+        <div >
+        <img src="/images/prof.png" alt="" />
+      </div>
+      <% }%>
       <p><%= elm.email%></p>
       <p><%= elm.category%></p>
       <% if(elm.isBlock) {%>
