@@ -39,7 +39,7 @@ img {
 header {
   min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(/images/banner-bg.jpg) center/cover no-repeat fixed;
+    url('/images/1.jpg') center/cover no-repeat fixed;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -92,7 +92,8 @@ header {
 }
 .banner-title span {
   font-family: var(--Playfair);
-  color: var(--exDark);
+  /* color: var(--exDark); */
+  color: rgb(36, 240, 9);
 }
 .banner p {
   padding: 1rem 0 2rem 0;
@@ -857,7 +858,7 @@ main {
   text-align: center;
 }
 .profile div {
-  width: 150px;
+  width: 250px;
 }
 .profile img {
   width: 100%;
@@ -941,4 +942,15 @@ main {
 }
 .admin-user a button {
   margin-right: 0.8rem;
+}
+
+.add-podcast {
+  text-align: center;
+}
+
+#user-profile {
+  width: 150px;
+}
+#user-profile img {
+  width: 100%;
 }
